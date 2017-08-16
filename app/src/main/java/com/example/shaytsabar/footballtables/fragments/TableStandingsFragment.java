@@ -6,6 +6,7 @@
     import android.os.Bundle;
     import android.os.StrictMode;
     import android.support.v4.app.Fragment;
+    import android.support.v4.app.FragmentManager;
     import android.support.v7.widget.LinearLayoutManager;
     import android.support.v7.widget.RecyclerView;
     import android.util.Log;
@@ -78,7 +79,7 @@
         }
 
         public TeamLeagueStandings [] GetBundesligaTeams() throws IOException, JSONException {
-            URL urlBL= League_standings.GetPLQuery();
+            URL urlBL= League_standings.GetBundesligaQuery();
             TeamLeagueStandings[] teams=League_standings.LeagueStandingsArray(urlBL);
             return  teams;
         }
@@ -89,7 +90,8 @@
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
             // Inflate the layout for this fragment
-            View v= inflater.inflate(R.layout.fragment_table, container, false);
+            View v= inflater.inflate(R.layout.fragment_recyclerview, container, false);
+
 
             try {
                 adapter= new TeamAdapter(GetBundesligaTeams());

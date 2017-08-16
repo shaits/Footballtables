@@ -3,4 +3,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="premier_league">Premier League</string>
+    <string name="championship">Football League Championship</string>
+    <string name="eredvise">Eredvise</string>
+    <string name="ligue1">Ligue 1 </string>
+    <string name="ligue2">Ligue 2</string>
+    <string name="bundesliga">Bundesliga</string>
+    <string name="secbundesliga">2. Bundesliga</string>
+    <string name="spanishleague">Primera División</string>
+    <string name="seria_A">Serie A</string>
+    <string name="portugeseleague">Primeira Liga</string>
 </resources>
