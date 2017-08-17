@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shaytsabar.footballtables.R;
@@ -68,6 +69,10 @@ public class TopBarLeaguesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_topbarleagues,container,false);
+        //ImageView imageView=v.findViewById(R.id.flagImage);
+     //   TextView textView=v.findViewById(R.id.leagueTextView);
+        //textView.setText(getString(R.string.portugeseleague));
+        //imageView.setImageResource(R.drawable.flagportugal);
         return v;
     }
 

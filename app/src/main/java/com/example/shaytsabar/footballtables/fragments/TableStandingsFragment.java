@@ -79,7 +79,7 @@
         }
 
         public TeamLeagueStandings [] GetBundesligaTeams() throws IOException, JSONException {
-            URL urlBL= League_standings.GetBundesligaQuery();
+            URL urlBL= League_standings.GetPLQuery();
             TeamLeagueStandings[] teams=League_standings.LeagueStandingsArray(urlBL);
             return  teams;
         }

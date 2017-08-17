@@ -7,28 +7,28 @@ import android.graphics.Bitmap;
  */
 
 public class TeamLeagueStandings {
-    private int place;
+    private String place;
     private String teamName;
-    private int curGames;
-    private int wins;
-    private int draws;
-    private int losses;
-    private int goalDifference;
-    private int points;
+    private String curGames;
+    private String wins;
+    private String draws;
+    private String losses;
+    private String goalDifference;
+    private String points;
     private String imgString;
 
-    public int getPlace() {
+    public String getPlace() {
         return place;
     }
 
-    public void setPlace(int place) {
+    public void setPlace(String place) {
         this.place = place;
     }
 
     public TeamLeagueStandings() {
     }
 
-    public TeamLeagueStandings(int place,String teamName, int curGames, int wins, int draws, int losses, int goalDifference, int points) {
+   /* public TeamLeagueStandings(int place,String teamName, int curGames, int wins, int draws, int losses, int goalDifference, int points) {
         this.place=place;
         this.teamName = teamName;
         this.curGames = curGames;
@@ -39,7 +39,7 @@ public class TeamLeagueStandings {
         this.points = points;
 
     }
-
+*/
     public String getTeamName() {
         return teamName;
     }
@@ -48,51 +48,51 @@ public class TeamLeagueStandings {
         this.teamName = teamName;
     }
 
-    public int getCurGames() {
+    public String getCurGames() {
         return curGames;
     }
 
-    public void setCurGames(int curGames) {
+    public void setCurGames(String curGames) {
         this.curGames = curGames;
     }
 
-    public int getWins() {
+    public String getWins() {
         return wins;
     }
 
-    public void setWins(int wins) {
+    public void setWins(String wins) {
         this.wins = wins;
     }
 
-    public int getDraws() {
+    public String getDraws() {
         return draws;
     }
 
-    public void setDraws(int draws) {
+    public void setDraws(String draws) {
         this.draws = draws;
     }
 
-    public int getLosses() {
+    public String getLosses() {
         return losses;
     }
 
-    public void setLosses(int losses) {
+    public void setLosses(String losses) {
         this.losses = losses;
     }
 
-    public int getGoalDifference() {
+    public String getGoalDifference() {
         return goalDifference;
     }
 
-    public void setGoalDifference(int goalDifference) {
+    public void setGoalDifference(String goalDifference) {
         this.goalDifference = goalDifference;
     }
 
-    public int getPoints() {
+    public String getPoints() {
         return points;
     }
 
-    public void setPoints(int points) {
+    public void setPoints(String points) {
         this.points = points;
     }
 

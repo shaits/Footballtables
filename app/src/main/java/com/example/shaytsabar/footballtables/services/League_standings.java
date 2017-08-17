@@ -11,7 +11,7 @@ import com.example.shaytsabar.footballtables.model.TeamLeagueStandings;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 import java.net.URL;
 
@@ -125,23 +125,30 @@ public class League_standings {
         // name,games,wins,draws,losses,GD,points, pic
         for (int i = 0; i < length; i++) {
 
-            JSONObject object = teamsJson.getJSONObject(i);
-            TeamLeagueStandings team = new TeamLeagueStandings();
-            team.setPlace(object.getInt("position"));
-            team.setTeamName(object.getString("teamName"));
-            team.setCurGames(object.getInt("playedGames"));
-            team.setWins(object.getInt("wins"));
-            team.setDraws(object.getInt("draws"));
-            team.setLosses(object.getInt("losses"));
-            team.setGoalDifference(object.getInt("goalDifference"));
-            team.setPoints(object.getInt("points"));
-            team.setImgString(object.getString("crestURI"));
-            if(team.getTeamName().toLowerCase().contains("FC".toLowerCase())){
-                team.setTeamName(team.getTeamName().replace("FC",""));
+
+                JSONObject object = teamsJson.getJSONObject((i));
+                TeamLeagueStandings team = new TeamLeagueStandings();
+                team.setPlace(Integer.toString(object.getInt("position")));
+                team.setTeamName(object.getString("teamName"));
+                team.setCurGames(Integer.toString(object.getInt("playedGames")));
+                team.setWins(Integer.toString(object.getInt("wins")));
+                team.setDraws(Integer.toString(object.getInt("draws")));
+                team.setLosses(Integer.toString(object.getInt("losses")));
+                team.setGoalDifference(Integer.toString(object.getInt("goalDifference")));
+                team.setPoints(Integer.toString(object.getInt("points")));
+                team.setImgString(object.getString("crestURI"));
+                if (team.getTeamName().toLowerCase().contains("FC".toLowerCase())) {
+                    team.setTeamName(team.getTeamName().replace("FC", ""));
+                }
+                if (team.getTeamName().endsWith(" ")) {
+                    team.setTeamName(StringUtils.strip(team.getTeamName()));
+
+                }
+
+
+                teams[i] = team;
             }
 
-            teams[i] = team;
-        }
         return teams;
     }
 

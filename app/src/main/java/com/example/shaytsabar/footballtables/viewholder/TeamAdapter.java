@@ -32,14 +32,14 @@ import com.example.shaytsabar.footballtables.model.TeamLeagueStandings;
             @Override
             public void onBindViewHolder(TeamAdapter.TeamViewHolder holder, int position) {
                 TeamLeagueStandings team = teams[position];
-                holder.place.setText(Integer.toString(team.getPlace())+ ".");
+                holder.place.setText(team.getPlace()+ ".");
                 holder.teamname.setText(team.getTeamName());
-                holder.matches.setText(Integer.toString(team.getCurGames()));
-                holder.wins.setText(Integer.toString(team.getWins()));
-                holder.draws.setText(Integer.toString(team.getDraws()));
-                holder.losses.setText(Integer.toString(team.getLosses()));
-                holder.gd.setText(Integer.toString(team.getGoalDifference()));
-                holder.points.setText(Integer.toString(team.getPoints()));
+                holder.matches.setText(team.getCurGames());
+                holder.wins.setText(team.getWins());
+                holder.draws.setText(team.getDraws());
+                holder.losses.setText(team.getLosses());
+                holder.gd.setText(team.getGoalDifference());
+                holder.points.setText(team.getPoints());
 
             }
 
