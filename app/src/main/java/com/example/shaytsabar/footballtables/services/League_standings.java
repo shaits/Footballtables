@@ -144,6 +144,17 @@ public class League_standings {
                     team.setTeamName(StringUtils.strip(team.getTeamName()));
 
                 }
+                if(team.getTeamName().length()>12) {
+                    String name = team.getTeamName();
+                    for (int j = 12; j < name.length(); j++) {
+                        char c = name.charAt(j);
+                        if (c == ' ') {
+                            name = name.substring(0, j) + "\n" + name.substring(j + 1);
+                            team.setTeamName(name);
+                            break;
+                        }
+                    }
+                }
 
 
                 teams[i] = team;

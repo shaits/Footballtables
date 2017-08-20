@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class Data {
     private final static String URLFOOTBALL= "http://api.football-data.org/v1/";
-
+    private final static String APIKEY="c68a1e2956304efd8c1445b63248046e ";
     public static URL BuildUrl(String searchQuery) {
         String finalURL= URLFOOTBALL+searchQuery;
         URL url=null;
@@ -32,6 +32,7 @@ public class Data {
 
     public static String GetResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestProperty("X-Auth-Token",APIKEY);
         try {
             InputStream in = urlConnection.getInputStream();
 
