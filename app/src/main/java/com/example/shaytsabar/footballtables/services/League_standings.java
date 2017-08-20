@@ -155,8 +155,6 @@ public class League_standings {
                         }
                     }
                 }
-
-
                 teams[i] = team;
             }
 

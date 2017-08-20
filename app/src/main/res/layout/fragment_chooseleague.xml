@@ -1,0 +1,66 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shaytsabar.footballtables.fragments.ChooseLeagueFragment">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/bundesliga_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#107896"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:text="Genetic mutation"
+            android:textColor="#d7dbe2"
+            tools:layout_editor_absoluteX="30dp"
+            tools:layout_editor_absoluteY="212dp" />
+
+        <Button
+            android:id="@+id/bundesliga2_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#107896"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:text="Genetic mutation"
+            android:textColor="#d7dbe2"
+            tools:layout_editor_absoluteX="205dp"
+            tools:layout_editor_absoluteY="212dp" />
+
+        <Button
+            android:id="@+id/championship_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#107896"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:text="Genetic mutation"
+            android:textColor="#d7dbe2"
+            tools:layout_editor_absoluteX="205dp"
+            tools:layout_editor_absoluteY="109dp" />
+
+        <Button
+            android:id="@+id/premierleague_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#107896"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:text="Genetic mutation"
+            android:textColor="#d7dbe2"
+            tools:layout_editor_absoluteX="30dp"
+            tools:layout_editor_absoluteY="109dp" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

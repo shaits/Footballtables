@@ -3,6 +3,7 @@
     import android.content.Context;
     import android.graphics.Rect;
     import android.net.Uri;
+    import android.os.AsyncTask;
     import android.os.Bundle;
     import android.os.StrictMode;
     import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@
 
     import com.example.shaytsabar.footballtables.R;
     import com.example.shaytsabar.footballtables.model.TeamLeagueStandings;
+    import com.example.shaytsabar.footballtables.services.Data;
     import com.example.shaytsabar.footballtables.services.League_standings;
     import com.example.shaytsabar.footballtables.viewholder.TeamAdapter;
 
@@ -36,14 +38,14 @@
     public class TableStandingsFragment extends Fragment {
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private static final String ARG_PARAM1 = "param1";
-        private static final String ARG_PARAM2 = "param2";
+        private static final String LEAGUETOLAUNCH = "league";
 
-        TeamAdapter adapter;
+
+        private TeamAdapter adapter;
 
         // TODO: Rename and change types of parameters
-        private String mParam1;
-        private String mParam2;
+        private String league;
+
 
         private OnFragmentInteractionListener mListener;
 
@@ -60,11 +62,10 @@
          * @return A new instance of fragment BlankFragment.
          */
         // TODO: Rename and change types and number of parameters
-        public static TableStandingsFragment newInstance(String param1, String param2) {
+        public static TableStandingsFragment newInstance(String param1) {
             TableStandingsFragment fragment = new TableStandingsFragment();
             Bundle args = new Bundle();
-            args.putString(ARG_PARAM1, param1);
-            args.putString(ARG_PARAM2, param2);
+            args.putString(LEAGUETOLAUNCH, param1);
             fragment.setArguments(args);
             return fragment;
         }
@@ -73,15 +74,53 @@
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             if (getArguments() != null) {
-                mParam1 = getArguments().getString(ARG_PARAM1);
-                mParam2 = getArguments().getString(ARG_PARAM2);
+                league = getArguments().getString(LEAGUETOLAUNCH);
             }
         }
 
-        public TeamLeagueStandings [] GetBundesligaTeams() throws IOException, JSONException {
-            URL urlBL= League_standings.GetPLQuery();
-            TeamLeagueStandings[] teams=League_standings.LeagueStandingsArray(urlBL);
-            return  teams;
+
+
+        public URL GeturlTeamsByArg() throws IOException, JSONException {
+            /*
+            Gets the correct table to the user, after he pressed on the button in the chooseleaguefragment.
+            */
+            URL url=null;
+            if(league==null)
+                return url;
+
+            switch (league) {
+                case ("Premier League"):
+                    url = League_standings.GetPLQuery();
+                    break;
+                case ("Football League Championship"):
+                    url = League_standings.GetChampionshipQuery();
+                    break;
+                case ("Eredvise"):
+                    url = League_standings.GetEredviseQuery();
+                    break;
+                case ("Ligue 1"):
+                    url = League_standings.GetLigue1Query();
+                    break;
+                case ("Ligue 2"):
+                    url = League_standings.GetLigue2Query();
+                    break;
+                case ("Bundesliga"):
+                    url = League_standings.GetBundesligaQuery();
+                    break;
+                case ("2. Bundesliga"):
+                    url = League_standings.GetSecBundesligaQuery();
+                    break;
+                case ("Primera División"):
+                    url = League_standings.GetSpanishQuery();
+                    break;
+                case ("Serie A"):
+                    url = League_standings.GetSeriaAQuery();
+                    break;
+                case ("Primeira Liga"):
+                    url = League_standings.GetPortugeseQuery();
+                    break;
+            }
+            return  url;
         }
 
         @Override
@@ -91,10 +130,8 @@
             StrictMode.setThreadPolicy(policy);
             // Inflate the layout for this fragment
             View v= inflater.inflate(R.layout.fragment_recyclerview, container, false);
-
-
-            try {
-                adapter= new TeamAdapter(GetBundesligaTeams());
+                try{
+                adapter=new TeamAdapter(League_standings.LeagueStandingsArray(GeturlTeamsByArg()));
                 RecyclerView recyclerView =  (RecyclerView) v.findViewById(R.id.recyler_teams);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(adapter);
@@ -102,15 +139,16 @@
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
                 layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(layoutManager);
-
-
             } catch (IOException e) {
                 e.printStackTrace();
-                Log.d("Error","We were unable to get the data from the server. Please try again later.");
             } catch (JSONException e) {
                 e.printStackTrace();
-                Log.d("Error","We were unable to get the data from the server. Please try again later.");
             }
+            catch (Exception e){
+                Log.d("error",e.toString());
+            }
+
+
 
 
             return v;
@@ -168,34 +206,39 @@
             // TODO: Update argument type and name
             void onFragmentInteraction(Uri uri);
         }
-    }
-
- /*
-    public class DownloadTask extends AsyncTask<URL, Void, TeamLeagueStandings[]> {
 
 
-        @Override
-        protected TeamLeagueStandings[] doInBackground(URL... urls) {
-            try {
-                return League_standings.LeagueStandingsArray(urls[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
+
+    /*    public class DownloadTask extends AsyncTask<URL, Void, TeamLeagueStandings[]> {
+
+            // COMPLETED (26) Override onPreExecute to set the loading indicator to visible
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+               // mLoadingIndicator.setVisibility(View.VISIBLE);
             }
-            return null;
+
+            @Override
+            protected TeamLeagueStandings[] doInBackground(URL... params) {
+                URL searchUrl = params[0];
+                TeamLeagueStandings[] results = null;
+                try {
+                    results= League_standings.LeagueStandingsArray(searchUrl);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                return results;
+            }
+
+            @Override
+            protected void onPostExecute(TeamLeagueStandings[] results) {
+                // COMPLETED (27) As soon as the loading is complete, hide the loading indicator
+               adapter=new TeamAdapter(results);
+            }
         }
-
-        @Override
-        protected void onPostExecute(TeamLeagueStandings[] teamLeagueStandingses) {
-
-          adapter=new TeamAdapter(teamLeagueStandingses);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            recyclerView.setLayoutManager(layoutManager);
-
-        }
-
+        */
 
     }
-    */
