@@ -1,6 +1,7 @@
     package com.example.shaytsabar.footballtables.fragments;
 
     import android.content.Context;
+    import android.content.res.Configuration;
     import android.graphics.Rect;
     import android.net.Uri;
     import android.os.AsyncTask;
@@ -36,6 +37,7 @@
         private String league;
         private View v;
         private OnFragmentInteractionListener mListener;
+        private boolean isOnLandscape=false;
 
         public TableStandingsFragment() {
             // Required empty public constructor
@@ -108,6 +110,10 @@
             @Override
             public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                      Bundle savedInstanceState) {
+                if(getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE)
+                    isOnLandscape=true;
+                else
+                    isOnLandscape=false;
                // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 //StrictMode.setThreadPolicy(policy);
                 v= inflater.inflate(R.layout.fragment_recyclerview, container, false);
@@ -192,7 +198,7 @@
                 URL searchUrl = params[0];
                 TeamLeagueStandings[] results = null;
                 try {
-                    results = League_standings.LeagueStandingsArray(searchUrl);
+                    results = League_standings.LeagueStandingsArray(searchUrl,isOnLandscape);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {

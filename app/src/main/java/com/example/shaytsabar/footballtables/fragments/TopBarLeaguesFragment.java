@@ -14,23 +14,13 @@ import com.example.shaytsabar.footballtables.R;
 
 import java.util.zip.Inflater;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BlankFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BlankFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TopBarLeaguesFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String LEAGUETOLAUNCH = "league";
+    private String league;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -38,20 +28,12 @@ public class TopBarLeaguesFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TopBarLeaguesFragment newInstance(String param1, String param2) {
+
+
+    public static TopBarLeaguesFragment newInstance(String param1) {
         TopBarLeaguesFragment fragment = new TopBarLeaguesFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(LEAGUETOLAUNCH, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,8 +42,54 @@ public class TopBarLeaguesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            league = getArguments().getString(LEAGUETOLAUNCH);
+
+        }
+    }
+    public void SetCorrectTopBar(View v){
+        TextView txtview=v.findViewById(R.id.leagueTextView);
+        ImageView imageView=v.findViewById(R.id.flagImage);
+        switch (league) {
+            case ("Premier League"):
+               txtview.setText(getResources().getString(R.string.premier_league));
+                imageView.setImageResource(R.drawable.flagengland);
+                break;
+            case ("Football League Championship"):
+                txtview.setText(getResources().getString(R.string.championship));
+                imageView.setImageResource(R.drawable.flagengland);
+                break;
+            case ("Eredvise"):
+                txtview.setText(getResources().getString(R.string.eredvise));
+                imageView.setImageResource(R.drawable.flagnetherlands);
+                break;
+            case ("Ligue 1"):
+                txtview.setText(getResources().getString(R.string.ligue1));
+                imageView.setImageResource(R.drawable.flagfrance);
+                break;
+            case ("Ligue 2"):
+                txtview.setText(getResources().getString(R.string.ligue2));
+                imageView.setImageResource(R.drawable.flagfrance);
+                break;
+            case ("Bundesliga"):
+                txtview.setText(getResources().getString(R.string.bundesliga));
+                imageView.setImageResource(R.drawable.flaggermany);
+                break;
+            case ("2. Bundesliga"):
+                txtview.setText(getResources().getString(R.string.secbundesliga));
+                imageView.setImageResource(R.drawable.flaggermany);
+                break;
+            case ("Primera División"):
+                txtview.setText(getResources().getString(R.string.spanishleague));
+                imageView.setImageResource(R.drawable.flagspain);
+                break;
+            case ("Serie A"):
+                txtview.setText(getResources().getString(R.string.seria_A));
+                imageView.setImageResource(R.drawable.flagitaly);
+                break;
+            case ("Primeira Liga"):
+                txtview.setText(getResources().getString(R.string.portugeseleague));
+                imageView.setImageResource(R.drawable.flagportugal);
+                break;
         }
     }
 
@@ -69,10 +97,7 @@ public class TopBarLeaguesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_topbarleagues,container,false);
-        //ImageView imageView=v.findViewById(R.id.flagImage);
-     //   TextView textView=v.findViewById(R.id.leagueTextView);
-        //textView.setText(getString(R.string.portugeseleague));
-        //imageView.setImageResource(R.drawable.flagportugal);
+        SetCorrectTopBar(v);
         return v;
     }
 

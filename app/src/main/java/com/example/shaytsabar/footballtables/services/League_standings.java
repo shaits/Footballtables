@@ -119,7 +119,7 @@ public class League_standings {
     }
 
 
-    public static TeamLeagueStandings[] LeagueStandingsArray(URL url) throws IOException, JSONException {
+    public static TeamLeagueStandings[] LeagueStandingsArray(URL url,boolean isOnLandscape) throws IOException, JSONException {
         //Gets the full url of the requested league table, should look like: "http://api.football-data.org/v1/competitions/445/leagueTable"
         //Processing the JSON data from the API, then returns an array which contains the teams of the league
         //that was requested, in THE ORDER OF THE TABLE!!!
@@ -150,14 +150,16 @@ public class League_standings {
                 team.setTeamName(StringUtils.strip(team.getTeamName()));
 
             }
-            if (team.getTeamName().length() > 12) {
-                String name = team.getTeamName();
-                for (int j = 12; j < name.length(); j++) {
-                    char c = name.charAt(j);
-                    if (c == ' ') {
-                        name = name.substring(0, j) + "\n" + name.substring(j + 1);
-                        team.setTeamName(name);
-                        break;
+            if(!isOnLandscape) {
+                if (team.getTeamName().length() > 12) {
+                    String name = team.getTeamName();
+                    for (int j = 12; j < name.length(); j++) {
+                        char c = name.charAt(j);
+                        if (c == ' ') {
+                            name = name.substring(0, j) + "\n" + name.substring(j + 1);
+                            team.setTeamName(name);
+                            break;
+                        }
                     }
                 }
             }
