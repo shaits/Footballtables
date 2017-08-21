@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPropertyAnimatorListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.shaytsabar.footballtables.R;
+import com.example.shaytsabar.footballtables.activities.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +28,15 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private final int premierLeagueid = R.id.premierleague_btn;
+    private final int championshipid = R.id.championship_btn;
+    private final int bundesligaid = R.id.bundesliga_btn;
+    private final int secbundesligaid = R.id.bundesliga2_btn;
+    private Button plbtn;
+    private Button championshipbtn;
+    private Button bundesligabtn;
+    private Button secbundesligabtn;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -67,7 +79,17 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chooseleague, container, false);
+        View v = inflater.inflate(R.layout.fragment_chooseleague, container, false);
+        plbtn = v.findViewById(R.id.premierleague_btn);
+        championshipbtn = v.findViewById(R.id.championship_btn);
+        bundesligabtn = v.findViewById(R.id.bundesliga_btn);
+        secbundesligabtn = v.findViewById(R.id.bundesliga2_btn);
+        plbtn.setOnClickListener(this);
+        championshipbtn.setOnClickListener(this);
+        bundesligabtn.setOnClickListener(this);
+        secbundesligabtn.setOnClickListener(this);
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -96,7 +118,30 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
+        int id = view.getId();
+        String arg = "";
+        switch (id) {
+            case (premierLeagueid):
+                arg = getResources().getString(R.string.premier_league);
+                break;
+            case (championshipid):
+                arg = getResources().getString(R.string.championship);
+                break;
+            case (bundesligaid):
+                arg = getResources().getString(R.string.bundesliga);
+                break;
+            case (secbundesligaid):
+                arg = getResources().getString(R.string.secbundesliga);
+                break;
+        }
 
+        MainActivity ma = (MainActivity) getActivity();
+        FragmentManager manager = ma.getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.toolbar_con, TopBarLeaguesFragment.newInstance("faf", "dsg")
+                , TopBarLeaguesFragment.class.getSimpleName()).commitAllowingStateLoss();
+        manager.beginTransaction().replace(R.id.fragment_con,
+                TableStandingsFragment.newInstance(arg),
+                TableStandingsFragment.class.getSimpleName()).commitAllowingStateLoss();
     }
 
     /**

@@ -13,4 +13,8 @@
     <string name="spanishleague">Primera División</string>
     <string name="seria_A">Serie A</string>
     <string name="portugeseleague">Primeira Liga</string>
+    <string name="error">Sorry, we were unable to get data from the server.
+        \nBUT\n Like good athletes, we will never give up. Try us again!</string>
+    <string name="kickit">Kick it again player!</string>
+    <string name="nevergiveup">See? Never give up!</string>
 </resources>

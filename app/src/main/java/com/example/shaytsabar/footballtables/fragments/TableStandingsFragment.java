@@ -14,6 +14,10 @@
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
+    import android.widget.Button;
+    import android.widget.ProgressBar;
+    import android.widget.TextView;
+    import android.widget.Toast;
 
     import com.example.shaytsabar.footballtables.R;
     import com.example.shaytsabar.footballtables.model.TeamLeagueStandings;
@@ -26,42 +30,18 @@
     import java.io.IOException;
     import java.net.URL;
 
-
-    /**
-     * A simple {@link Fragment} subclass.
-     * Activities that contain this fragment must implement the
-     * {@link BlankFragment.OnFragmentInteractionListener} interface
-     * to handle interaction events.
-     * Use the {@link BlankFragment#newInstance} factory method to
-     * create an instance of this fragment.
-     */
     public class TableStandingsFragment extends Fragment {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
         private static final String LEAGUETOLAUNCH = "league";
-
-
-        private TeamAdapter adapter;
-
-        // TODO: Rename and change types of parameters
+        private ProgressBar progressBar;
         private String league;
-
-
+        private View v;
         private OnFragmentInteractionListener mListener;
 
         public TableStandingsFragment() {
             // Required empty public constructor
         }
 
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BlankFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         public static TableStandingsFragment newInstance(String param1) {
             TableStandingsFragment fragment = new TableStandingsFragment();
             Bundle args = new Bundle();
@@ -72,6 +52,9 @@
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
+            // Gets the argument of the fragment. This will tell us which league table to show
+            //using the method "GeturlTeamsByArg", which gives the URL, and then using AsyncTask to get
+            //the actual data, with the given url.
             super.onCreate(savedInstanceState);
             if (getArguments() != null) {
                 league = getArguments().getString(LEAGUETOLAUNCH);
@@ -80,14 +63,13 @@
 
 
 
-        public URL GeturlTeamsByArg() throws IOException, JSONException {
-            /*
-            Gets the correct table to the user, after he pressed on the button in the chooseleaguefragment.
-            */
-            URL url=null;
-            if(league==null)
-                return url;
+        public URL GeturlTeamsByArg() {
 
+            //Returns the correct URL of the required league table, depends on the variable "league"
+
+            URL url=null;
+            if (league == "" || league == null)
+                return null;
             switch (league) {
                 case ("Premier League"):
                     url = League_standings.GetPLQuery();
@@ -123,36 +105,26 @@
             return  url;
         }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-            // Inflate the layout for this fragment
-            View v= inflater.inflate(R.layout.fragment_recyclerview, container, false);
-                try{
-                adapter=new TeamAdapter(League_standings.LeagueStandingsArray(GeturlTeamsByArg()));
-                RecyclerView recyclerView =  (RecyclerView) v.findViewById(R.id.recyler_teams);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(adapter);
-                recyclerView.addItemDecoration(new VerticalSpaceItemDecorator(30));
-                LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                recyclerView.setLayoutManager(layoutManager);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
+            @Override
+            public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                     Bundle savedInstanceState) {
+               // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                //StrictMode.setThreadPolicy(policy);
+                v= inflater.inflate(R.layout.fragment_recyclerview, container, false);
+                progressBar = v.findViewById(R.id.progressBar);
+                DownloadTask downloadTask=new DownloadTask();
+                try {
+                    downloadTask.execute(GeturlTeamsByArg());
+                }
+                catch (Exception e){
+                    Log.d("error",e.toString());
+                }
+
+
+
+
+                return v;
             }
-            catch (Exception e){
-                Log.d("error",e.toString());
-            }
-
-
-
-
-            return v;
-        }
 
 
         // TODO: Rename method, update argument and hook method into UI event
@@ -178,6 +150,12 @@
             super.onDetach();
             mListener = null;
         }
+
+        //@Override
+        /*public void onSaveInstanceState(Bundle savedInstanceState) {
+            savedInstanceState.putString(LEAGUETOLAUNCH,league);
+        }
+        */
         class VerticalSpaceItemDecorator extends RecyclerView.ItemDecoration {
 
             private final int spacer;
@@ -192,16 +170,7 @@
                 outRect.bottom = spacer;
             }
         }
-        /**
-         * This interface must be implemented by activities that contain this
-         * fragment to allow an interaction in this fragment to be communicated
-         * to the activity and potentially other fragments contained in that
-         * activity.
-         * <p>
-         * See the Android Training lesson <a href=
-         * "http://developer.android.com/training/basics/fragments/communicating.html"
-         * >Communicating with Other Fragments</a> for more information.
-         */
+
         public interface OnFragmentInteractionListener {
             // TODO: Update argument type and name
             void onFragmentInteraction(Uri uri);
@@ -209,13 +178,13 @@
 
 
 
-    /*    public class DownloadTask extends AsyncTask<URL, Void, TeamLeagueStandings[]> {
+        public class DownloadTask extends AsyncTask<URL, Void, TeamLeagueStandings[]> {
 
             // COMPLETED (26) Override onPreExecute to set the loading indicator to visible
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-               // mLoadingIndicator.setVisibility(View.VISIBLE);
+               progressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -223,7 +192,7 @@
                 URL searchUrl = params[0];
                 TeamLeagueStandings[] results = null;
                 try {
-                    results= League_standings.LeagueStandingsArray(searchUrl);
+                    results = League_standings.LeagueStandingsArray(searchUrl);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -235,10 +204,40 @@
 
             @Override
             protected void onPostExecute(TeamLeagueStandings[] results) {
-                // COMPLETED (27) As soon as the loading is complete, hide the loading indicator
-               adapter=new TeamAdapter(results);
+                progressBar.setVisibility(View.INVISIBLE);
+                TextView errortxtview= v.findViewById(R.id.error_txtview);
+                Button tryagainbtn=v.findViewById(R.id.tryagain_btn);
+                if(results==null) {
+                    errortxtview.setVisibility(View.VISIBLE);
+                    tryagainbtn.setVisibility(View.VISIBLE);
+                    tryagainbtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            DownloadTask downloadTask1=new DownloadTask();
+                            downloadTask1.execute(GeturlTeamsByArg());
+                        }
+                    });
+                }
+                else {
+                    if(errortxtview.getVisibility()==View.VISIBLE){
+                        errortxtview.setVisibility(View.GONE);
+                        tryagainbtn.setVisibility(View.GONE);
+                        Toast toast = Toast.makeText(getContext(), getResources().
+                                getString(R.string.nevergiveup) , Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    TeamAdapter adapter = new TeamAdapter(results);
+                    RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyler_teams);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.addItemDecoration(new VerticalSpaceItemDecorator(30));
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                    layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    recyclerView.setLayoutManager(layoutManager);
+                }
+
             }
         }
-        */
+
 
     }

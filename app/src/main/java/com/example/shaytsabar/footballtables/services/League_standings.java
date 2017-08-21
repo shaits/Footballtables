@@ -22,19 +22,19 @@ import java.net.URL;
 public class League_standings {
 
     //League codes in the url
-    private final static int PLCODE=445;
-    private final static int CHAMPIONSHIPCODE=446;
-    private final static int EREDVISECODE=449;
-    private final static int LIGUE1CODE=450;
-    private final static int LIGUE2CODE=451;
-    private final static int BUNDESLIGACODE=452;
-    private final static int SECBUNDESLIGACODE=453;
-    private final static int SPANISHCODE=455;
-    private final static int SERIAACODE=456;
-    private final static int PORTUGESECODE=457;
-    private static String nationCode="";
-    private static String querystr="";
-    private static URL url= null;
+    private final static int PLCODE = 445;
+    private final static int CHAMPIONSHIPCODE = 446;
+    private final static int EREDVISECODE = 449;
+    private final static int LIGUE1CODE = 450;
+    private final static int LIGUE2CODE = 451;
+    private final static int BUNDESLIGACODE = 452;
+    private final static int SECBUNDESLIGACODE = 453;
+    private final static int SPANISHCODE = 455;
+    private final static int SERIAACODE = 456;
+    private final static int PORTUGESECODE = 457;
+    private static String nationCode = "";
+    private static String querystr = "";
+    private static URL url = null;
     private static TeamLeagueStandings[] teams;
 
 
@@ -69,6 +69,7 @@ public class League_standings {
         url = Data.BuildUrl(querystr);
         return url;
     }
+
     public static URL GetLigue2Query() {
         // Returns the full URL of the search query combined with the ligue2 code.
         nationCode = Integer.toString(LIGUE2CODE);
@@ -76,6 +77,7 @@ public class League_standings {
         url = Data.BuildUrl(querystr);
         return url;
     }
+
     public static URL GetBundesligaQuery() {
         // Returns the full URL of the search query combined with the bundesliga code.
         nationCode = Integer.toString(BUNDESLIGACODE);
@@ -83,6 +85,7 @@ public class League_standings {
         url = Data.BuildUrl(querystr);
         return url;
     }
+
     public static URL GetSecBundesligaQuery() {
         // Returns the full URL of the search query combined with the second bundesliga code.
         nationCode = Integer.toString(SECBUNDESLIGACODE);
@@ -90,20 +93,23 @@ public class League_standings {
         url = Data.BuildUrl(querystr);
         return url;
     }
-    public static URL GetSpanishQuery(){
+
+    public static URL GetSpanishQuery() {
         // Returns the full URL of the search query combined with the Spanish league code.
-        nationCode= Integer.toString(SPANISHCODE);
-        querystr="competitions/" + nationCode + "/leagueTable";
-        url= Data.BuildUrl(querystr);
+        nationCode = Integer.toString(SPANISHCODE);
+        querystr = "competitions/" + nationCode + "/leagueTable";
+        url = Data.BuildUrl(querystr);
         return url;
     }
-    public static URL GetSeriaAQuery(){
+
+    public static URL GetSeriaAQuery() {
         // Returns the full URL of the search query combined with the seria A code.
-        nationCode= Integer.toString(SERIAACODE);
-        querystr="competitions/" + nationCode + "/leagueTable";
-        url= Data.BuildUrl(querystr);
+        nationCode = Integer.toString(SERIAACODE);
+        querystr = "competitions/" + nationCode + "/leagueTable";
+        url = Data.BuildUrl(querystr);
         return url;
     }
+
     public static URL GetPortugeseQuery() {
         // Returns the full URL of the search query combined with the Portugese league code.
         nationCode = Integer.toString(PORTUGESECODE);
@@ -126,42 +132,39 @@ public class League_standings {
         for (int i = 0; i < length; i++) {
 
 
-                JSONObject object = teamsJson.getJSONObject((i));
-                TeamLeagueStandings team = new TeamLeagueStandings();
-                team.setPlace(Integer.toString(object.getInt("position")));
-                team.setTeamName(object.getString("teamName"));
-                team.setCurGames(Integer.toString(object.getInt("playedGames")));
-                team.setWins(Integer.toString(object.getInt("wins")));
-                team.setDraws(Integer.toString(object.getInt("draws")));
-                team.setLosses(Integer.toString(object.getInt("losses")));
-                team.setGoalDifference(Integer.toString(object.getInt("goalDifference")));
-                team.setPoints(Integer.toString(object.getInt("points")));
-                team.setImgString(object.getString("crestURI"));
-                if (team.getTeamName().toLowerCase().contains("FC".toLowerCase())) {
-                    team.setTeamName(team.getTeamName().replace("FC", ""));
-                }
-                if (team.getTeamName().endsWith(" ")) {
-                    team.setTeamName(StringUtils.strip(team.getTeamName()));
+            JSONObject object = teamsJson.getJSONObject((i));
+            TeamLeagueStandings team = new TeamLeagueStandings();
+            team.setPlace(Integer.toString(object.getInt("position")));
+            team.setTeamName(object.getString("teamName"));
+            team.setCurGames(Integer.toString(object.getInt("playedGames")));
+            team.setWins(Integer.toString(object.getInt("wins")));
+            team.setDraws(Integer.toString(object.getInt("draws")));
+            team.setLosses(Integer.toString(object.getInt("losses")));
+            team.setGoalDifference(Integer.toString(object.getInt("goalDifference")));
+            team.setPoints(Integer.toString(object.getInt("points")));
+            team.setImgString(object.getString("crestURI"));
+            if (team.getTeamName().toLowerCase().contains("FC".toLowerCase())) {
+                team.setTeamName(team.getTeamName().replace("FC", ""));
+            }
+            if (team.getTeamName().endsWith(" ")) {
+                team.setTeamName(StringUtils.strip(team.getTeamName()));
 
-                }
-                if(team.getTeamName().length()>12) {
-                    String name = team.getTeamName();
-                    for (int j = 12; j < name.length(); j++) {
-                        char c = name.charAt(j);
-                        if (c == ' ') {
-                            name = name.substring(0, j) + "\n" + name.substring(j + 1);
-                            team.setTeamName(name);
-                            break;
-                        }
+            }
+            if (team.getTeamName().length() > 12) {
+                String name = team.getTeamName();
+                for (int j = 12; j < name.length(); j++) {
+                    char c = name.charAt(j);
+                    if (c == ' ') {
+                        name = name.substring(0, j) + "\n" + name.substring(j + 1);
+                        team.setTeamName(name);
+                        break;
                     }
                 }
-                teams[i] = team;
             }
+            teams[i] = team;
+        }
 
         return teams;
     }
-
-
-
 
 }
