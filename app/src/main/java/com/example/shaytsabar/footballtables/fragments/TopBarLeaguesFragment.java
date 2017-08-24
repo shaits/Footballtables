@@ -90,6 +90,10 @@ public class TopBarLeaguesFragment extends Fragment {
                 txtview.setText(getResources().getString(R.string.portugeseleague));
                 imageView.setImageResource(R.drawable.flagportugal);
                 break;
+            default:
+                txtview.setText(getResources().getString(R.string.app_name));
+                //  imageView.setImageResource(R.mipmap.footballicon);
+                break;
         }
     }
 

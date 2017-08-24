@@ -31,9 +31,11 @@
     import java.io.IOException;
     import java.net.URL;
 
+    import pl.droidsonroids.gif.GifTextView;
+
     public class TableStandingsFragment extends Fragment {
         private static final String LEAGUETOLAUNCH = "league";
-        private ProgressBar progressBar;
+     //   private GifTextView gifTextView;
         private String league;
         private View v;
         private OnFragmentInteractionListener mListener;
@@ -117,7 +119,7 @@
                // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 //StrictMode.setThreadPolicy(policy);
                 v= inflater.inflate(R.layout.fragment_recyclerview, container, false);
-                progressBar = v.findViewById(R.id.progressBar);
+       //         gifTextView= v.findViewById(R.id.gifimage);
                 DownloadTask downloadTask=new DownloadTask();
                 try {
                     downloadTask.execute(GeturlTeamsByArg());
@@ -190,7 +192,7 @@
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-               progressBar.setVisibility(View.VISIBLE);
+
             }
 
             @Override
@@ -210,7 +212,7 @@
 
             @Override
             protected void onPostExecute(TeamLeagueStandings[] results) {
-                progressBar.setVisibility(View.INVISIBLE);
+                //gifTextView.setVisibility(View.INVISIBLE);
                 TextView errortxtview= v.findViewById(R.id.error_txtview);
                 Button tryagainbtn=v.findViewById(R.id.tryagain_btn);
                 if(results==null) {

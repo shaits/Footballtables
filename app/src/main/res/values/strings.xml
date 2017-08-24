@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Football tables</string>
+    <string name="app_name">Football Tables</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="premier_league">Premier League</string>
     <string name="championship">Football League Championship</string>
@@ -17,4 +18,5 @@
         \nBUT\n Like good athletes, we will never give up. Try us again!</string>
     <string name="kickit">Kick it again player!</string>
     <string name="nevergiveup">See? Never give up!</string>
+    <string name="ad_id">ca-app-pub-3046903934801639/2092473541</string>
 </resources>

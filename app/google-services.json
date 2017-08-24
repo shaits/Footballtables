@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "345114494819",
+    "firebase_url": "https://football-tables.firebaseio.com",
+    "project_id": "football-tables",
+    "storage_bucket": "football-tables.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345114494819:android:9dd6b5f0cb1c9f83",
+        "android_client_info": {
+          "package_name": "com.example.shaytsabar.footballtables"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345114494819-gnuh3lrfhjqig6otcsb60rq8rurp8qur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_aL3pSQjY34EJTzQWgAvQ_8ozOaymZPU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
