@@ -143,26 +143,27 @@ public class League_standings {
             team.setGoalDifference(Integer.toString(object.getInt("goalDifference")));
             team.setPoints(Integer.toString(object.getInt("points")));
             team.setImgString(object.getString("crestURI"));
-            if (team.getTeamName().toLowerCase().contains("FC".toLowerCase())) {
-                team.setTeamName(team.getTeamName().replace("FC", ""));
+            String teamm= team.getTeamName();
+            if (teamm.toLowerCase().contains("FC".toLowerCase())) {
+                teamm = teamm.replace("FC", "");
             }
-            if (team.getTeamName().endsWith(" ")) {
-                team.setTeamName(StringUtils.strip(team.getTeamName()));
+            if (teamm.endsWith(" ")) {
+                teamm = StringUtils.strip(teamm);
 
             }
             if(!isOnLandscape) {
-                if (team.getTeamName().length() > 12) {
-                    String name = team.getTeamName();
-                    for (int j = 12; j < name.length(); j++) {
-                        char c = name.charAt(j);
+                if (teamm.length() > 12) {
+
+                    for (int j = 12; j < teamm.length(); j++) {
+                        char c = teamm.charAt(j);
                         if (c == ' ') {
-                            name = name.substring(0, j) + "\n" + name.substring(j + 1);
-                            team.setTeamName(name);
+                            teamm = teamm.substring(0, j) + "\n" + teamm.substring(j + 1);
                             break;
                         }
                     }
                 }
             }
+            team.setTeamName(teamm);
             teams[i] = team;
         }
 

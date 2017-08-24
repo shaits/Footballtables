@@ -137,9 +137,11 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
 
         MainActivity ma = (MainActivity) getActivity();
         FragmentManager manager = ma.getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.toolbar_con, TopBarLeaguesFragment.newInstance(arg)
+        manager.beginTransaction().
+                replace(R.id.toolbar_con, TopBarLeaguesFragment.newInstance(arg)
                 , TopBarLeaguesFragment.class.getSimpleName()).commitAllowingStateLoss();
-        manager.beginTransaction().replace(R.id.fragment_con,
+        manager.beginTransaction().
+                replace(R.id.fragment_con,
                 TableStandingsFragment.newInstance(arg),
                 TableStandingsFragment.class.getSimpleName()).commitAllowingStateLoss();
     }
