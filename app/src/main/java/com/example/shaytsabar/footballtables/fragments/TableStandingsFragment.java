@@ -21,6 +21,7 @@
     import android.widget.Toast;
 
     import com.example.shaytsabar.footballtables.R;
+    import com.example.shaytsabar.footballtables.activities.MainActivity;
     import com.example.shaytsabar.footballtables.model.TeamLeagueStandings;
     import com.example.shaytsabar.footballtables.services.Data;
     import com.example.shaytsabar.footballtables.services.League_standings;
@@ -31,7 +32,7 @@
     import java.io.IOException;
     import java.net.URL;
 
-    import pl.droidsonroids.gif.GifTextView;
+    //import pl.droidsonroids.gif.GifTextView;
 
     public class TableStandingsFragment extends Fragment {
         private static final String LEAGUETOLAUNCH = "league";
@@ -56,9 +57,7 @@
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
-            // Gets the argument of the fragment. This will tell us which league table to show
-            //using the method "GeturlTeamsByArg", which gives the URL, and then using AsyncTask to get
-            //the actual data, with the given url.
+
             super.onCreate(savedInstanceState);
             if (getArguments() != null) {
                 league = getArguments().getString(LEAGUETOLAUNCH);
@@ -102,8 +101,14 @@
                 case ("Serie A"):
                     url = League_standings.GetSeriaAQuery();
                     break;
+                case ("Serie B"):
+                    url=League_standings.GetSeriaBQuery();
+                    break;
                 case ("Primeira Liga"):
                     url = League_standings.GetPortugeseQuery();
+                    break;
+                case ("Brasileirão"):
+                    url=League_standings.GetBrazilQuery();
                     break;
             }
             return  url;
@@ -119,18 +124,8 @@
                // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 //StrictMode.setThreadPolicy(policy);
                 v= inflater.inflate(R.layout.fragment_recyclerview, container, false);
-       //         gifTextView= v.findViewById(R.id.gifimage);
                 DownloadTask downloadTask=new DownloadTask();
-                try {
-                    downloadTask.execute(GeturlTeamsByArg());
-                }
-                catch (Exception e){
-                    Log.d("error",e.toString());
-                }
-
-
-
-
+                downloadTask.execute(GeturlTeamsByArg());
                 return v;
             }
 
@@ -159,11 +154,6 @@
             mListener = null;
         }
 
-        //@Override
-        /*public void onSaveInstanceState(Bundle savedInstanceState) {
-            savedInstanceState.putString(LEAGUETOLAUNCH,league);
-        }
-        */
         class VerticalSpaceItemDecorator extends RecyclerView.ItemDecoration {
 
             private final int spacer;
@@ -233,6 +223,9 @@
                         Toast toast = Toast.makeText(getContext(), getResources().
                                 getString(R.string.nevergiveup) , Toast.LENGTH_SHORT);
                         toast.show();
+                        MainActivity mainActivity= (MainActivity) getActivity();
+                        mainActivity.ShowLittleAd();
+
                     }
                     TeamAdapter adapter = new TeamAdapter(results);
                     RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyler_teams);

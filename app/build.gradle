@@ -32,7 +32,7 @@ dependencies {
     compile 'com.android.support:support-v4:26.+'
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'com.google.firebase:firebase-ads:10.2.6'
-    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
+    //compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 
     //compile 'com.google.android.gms:play-services-ads:11.2.0'
     testCompile 'junit:junit:4.12'

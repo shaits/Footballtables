@@ -1,10 +1,5 @@
 package com.example.shaytsabar.footballtables.services;
 
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
-import android.support.annotation.IntegerRes;
-import android.util.Log;
-
 
 import com.example.shaytsabar.footballtables.model.TeamLeagueStandings;
 
@@ -31,95 +26,111 @@ public class League_standings {
     private final static int SECBUNDESLIGACODE = 453;
     private final static int SPANISHCODE = 455;
     private final static int SERIAACODE = 456;
+    private final static int SERIABCODE=459;
     private final static int PORTUGESECODE = 457;
-    private static String nationCode = "";
+    private final static int BRAZILCODE=444;
+    private static String leagueCode = "";
     private static String querystr = "";
     private static URL url = null;
     private static TeamLeagueStandings[] teams;
 
+    public static URL GetBrazilQuery() {
+        // Returns the full URL of the search query combined with the PL code.
+        leagueCode = Integer.toString(BRAZILCODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
+        url = Data.BuildUrl(querystr);
+        return url;
+    }
 
     public static URL GetPLQuery() {
         // Returns the full URL of the search query combined with the PL code.
-        nationCode = Integer.toString(PLCODE);
-        querystr = "competitions/" + nationCode + "/leagueTable";
+        leagueCode = Integer.toString(PLCODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
         url = Data.BuildUrl(querystr);
         return url;
     }
 
     public static URL GetChampionshipQuery() {
         // Returns the full URL of the search query combined with the championship code.
-        nationCode = Integer.toString(CHAMPIONSHIPCODE);
-        querystr = "competitions/" + nationCode + "/leagueTable";
+        leagueCode = Integer.toString(CHAMPIONSHIPCODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
         url = Data.BuildUrl(querystr);
         return url;
     }
 
     public static URL GetEredviseQuery() {
         // Returns the full URL of the search query combined with the eredvise code.
-        nationCode = Integer.toString(EREDVISECODE);
-        querystr = "competitions/" + nationCode + "/leagueTable";
+        leagueCode = Integer.toString(EREDVISECODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
         url = Data.BuildUrl(querystr);
         return url;
     }
 
     public static URL GetLigue1Query() {
         // Returns the full URL of the search query combined with the ligue1 code.
-        nationCode = Integer.toString(LIGUE1CODE);
-        querystr = "competitions/" + nationCode + "/leagueTable";
+        leagueCode = Integer.toString(LIGUE1CODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
         url = Data.BuildUrl(querystr);
         return url;
     }
 
     public static URL GetLigue2Query() {
         // Returns the full URL of the search query combined with the ligue2 code.
-        nationCode = Integer.toString(LIGUE2CODE);
-        querystr = "competitions/" + nationCode + "/leagueTable";
+        leagueCode = Integer.toString(LIGUE2CODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
         url = Data.BuildUrl(querystr);
         return url;
     }
 
     public static URL GetBundesligaQuery() {
         // Returns the full URL of the search query combined with the bundesliga code.
-        nationCode = Integer.toString(BUNDESLIGACODE);
-        querystr = "competitions/" + nationCode + "/leagueTable";
+        leagueCode = Integer.toString(BUNDESLIGACODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
         url = Data.BuildUrl(querystr);
         return url;
     }
 
     public static URL GetSecBundesligaQuery() {
         // Returns the full URL of the search query combined with the second bundesliga code.
-        nationCode = Integer.toString(SECBUNDESLIGACODE);
-        querystr = "competitions/" + nationCode + "/leagueTable";
+        leagueCode = Integer.toString(SECBUNDESLIGACODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
         url = Data.BuildUrl(querystr);
         return url;
     }
 
     public static URL GetSpanishQuery() {
         // Returns the full URL of the search query combined with the Spanish league code.
-        nationCode = Integer.toString(SPANISHCODE);
-        querystr = "competitions/" + nationCode + "/leagueTable";
+        leagueCode = Integer.toString(SPANISHCODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
         url = Data.BuildUrl(querystr);
         return url;
     }
 
     public static URL GetSeriaAQuery() {
         // Returns the full URL of the search query combined with the seria A code.
-        nationCode = Integer.toString(SERIAACODE);
-        querystr = "competitions/" + nationCode + "/leagueTable";
+        leagueCode = Integer.toString(SERIAACODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
+        url = Data.BuildUrl(querystr);
+        return url;
+    }
+    public static URL GetSeriaBQuery() {
+        // Returns the full URL of the search query combined with the seria A code.
+        leagueCode = Integer.toString(SERIABCODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
         url = Data.BuildUrl(querystr);
         return url;
     }
 
     public static URL GetPortugeseQuery() {
         // Returns the full URL of the search query combined with the Portugese league code.
-        nationCode = Integer.toString(PORTUGESECODE);
-        querystr = "competitions/" + nationCode + "/leagueTable";
+        leagueCode = Integer.toString(PORTUGESECODE);
+        querystr = "competitions/" + leagueCode + "/leagueTable";
         url = Data.BuildUrl(querystr);
         return url;
     }
 
 
-    public static TeamLeagueStandings[] LeagueStandingsArray(URL url,boolean isOnLandscape) throws IOException, JSONException {
+    public static TeamLeagueStandings[] LeagueStandingsArray(URL url, boolean isOnLandscape) throws IOException, JSONException {
         //Gets the full url of the requested league table, should look like: "http://api.football-data.org/v1/competitions/445/leagueTable"
         //Processing the JSON data from the API, then returns an array which contains the teams of the league
         //that was requested, in THE ORDER OF THE TABLE!!!
@@ -134,7 +145,7 @@ public class League_standings {
 
             JSONObject object = teamsJson.getJSONObject((i));
             TeamLeagueStandings team = new TeamLeagueStandings();
-            team.setPlace(Integer.toString(object.getInt("position")));
+            team.setPlace(Integer.toString(i+1));
             team.setTeamName(object.getString("teamName"));
             team.setCurGames(Integer.toString(object.getInt("playedGames")));
             team.setWins(Integer.toString(object.getInt("wins")));
@@ -143,26 +154,8 @@ public class League_standings {
             team.setGoalDifference(Integer.toString(object.getInt("goalDifference")));
             team.setPoints(Integer.toString(object.getInt("points")));
             team.setImgString(object.getString("crestURI"));
-            String teamm= team.getTeamName();
-            if (teamm.toLowerCase().contains("FC".toLowerCase())) {
-                teamm = teamm.replace("FC", "");
-            }
-            if (teamm.endsWith(" ")) {
-                teamm = StringUtils.strip(teamm);
-
-            }
-            if(!isOnLandscape) {
-                if (teamm.length() > 12) {
-
-                    for (int j = 12; j < teamm.length(); j++) {
-                        char c = teamm.charAt(j);
-                        if (c == ' ') {
-                            teamm = teamm.substring(0, j) + "\n" + teamm.substring(j + 1);
-                            break;
-                        }
-                    }
-                }
-            }
+            String teamm = team.getTeamName();
+            teamm=FixGoddamnAPIErrors(teamm,isOnLandscape);
             team.setTeamName(teamm);
             teams[i] = team;
         }
@@ -170,4 +163,24 @@ public class League_standings {
         return teams;
     }
 
+    private static String FixGoddamnAPIErrors(String teamm, boolean isOnLandscape) {
+        if (teamm.startsWith("1. "))
+            teamm = teamm.replace("1. ", "");
+        if (teamm.toLowerCase().contains("FC".toLowerCase()))
+            teamm = teamm.replace("FC", "");
+        if (teamm.endsWith(" "))
+            teamm = StringUtils.strip(teamm);
+        if (!isOnLandscape) {
+            if (teamm.length() > 12) {
+                for (int j = 12; j < teamm.length(); j++) {
+                    char c = teamm.charAt(j);
+                    if (c == ' ') {
+                        teamm = teamm.substring(0, j) + "\n" + teamm.substring(j + 1);
+                        break;
+                    }
+                }
+            }
+        }
+        return teamm;
+    }
 }

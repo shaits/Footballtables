@@ -1,5 +1,6 @@
 package com.example.shaytsabar.footballtables.viewholder;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +38,7 @@ import com.example.shaytsabar.footballtables.model.TeamLeagueStandings;
     @Override
     public void onBindViewHolder(TeamAdapter.TeamViewHolder holder, int position) {
 
+
         TeamLeagueStandings team = teams[position];
         holder.place.setText(team.getPlace());
         holder.teamname.setText(team.getTeamName());
@@ -46,9 +48,11 @@ import com.example.shaytsabar.footballtables.model.TeamLeagueStandings;
         holder.losses.setText(team.getLosses());
         holder.gd.setText(team.getGoalDifference());
         holder.points.setText(team.getPoints());
-        if(Integer.parseInt(team.getPlace()) % 2 != 0 ){
+        if(Integer.parseInt(team.getPlace()) %2 == 0 )
             holder.rootview.setBackgroundColor(Color.parseColor("#EBEBEB"));
-        }
+        else
+            holder.rootview.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
 
 
     }

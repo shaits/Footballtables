@@ -18,7 +18,7 @@
 
             <Button
                 android:id="@+id/ligue1_btn"
-                android:layout_width="150dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="0dp"
@@ -35,7 +35,7 @@
 
             <Button
                 android:id="@+id/ligue2_btn"
-                android:layout_width="150dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="0dp"
@@ -52,7 +52,7 @@
 
             <Button
                 android:id="@+id/eredvise_btn"
-                android:layout_width="150dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="0dp"
@@ -69,7 +69,7 @@
 
             <Button
                 android:id="@+id/seriaa_btn"
-                android:layout_width="150dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="0dp"
@@ -86,7 +86,7 @@
 
             <Button
                 android:id="@+id/seriab_btn"
-                android:layout_width="150dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="0dp"
@@ -103,7 +103,7 @@
 
             <Button
                 android:id="@+id/spanish_btn"
-                android:layout_width="150dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="0dp"
@@ -120,7 +120,7 @@
 
             <Button
                 android:id="@+id/brazil_btn"
-                android:layout_width="150dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="0dp"
@@ -138,7 +138,7 @@
 
             <Button
                 android:id="@+id/portugese_btn"
-                android:layout_width="150dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="0dp"
@@ -155,7 +155,7 @@
 
             <Button
                 android:id="@+id/bundesliga_btn"
-                android:layout_width="150dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="-42dp"
@@ -172,7 +172,7 @@
 
             <Button
                 android:id="@+id/bundesliga2_btn"
-                android:layout_width="150dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="0dp"
@@ -189,11 +189,11 @@
 
             <Button
                 android:id="@+id/championship_btn"
-                android:layout_width="150dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="8dp"
-                android:layout_marginRight="19dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginTop="16dp"
                 android:background="#9bdbc7"
                 android:drawablePadding="10dp"
@@ -211,10 +211,10 @@
 
             <Button
                 android:id="@+id/premierleague_btn"
-                android:layout_width="149dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginTop="16dp"
                 android:background="#9bdbc7"
                 android:drawableRight="@drawable/flagengland"

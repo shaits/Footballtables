@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,14 +27,18 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private final int premierLeagueid = R.id.premierleague_btn;
-    private final int championshipid = R.id.championship_btn;
-    private final int bundesligaid = R.id.bundesliga_btn;
-    private final int secbundesligaid = R.id.bundesliga2_btn;
     private Button plbtn;
     private Button championshipbtn;
     private Button bundesligabtn;
     private Button secbundesligabtn;
+    private Button ligue1btn;
+    private Button ligue2btn;
+    private Button eredvisebtn;
+    private Button spanishbtn;
+    private Button seriaabtn;
+    private Button seriabbtn;
+    private Button portugesebtn;
+    private Button brazilbtn;
 
 
     // TODO: Rename and change types of parameters
@@ -84,11 +87,26 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
         championshipbtn = v.findViewById(R.id.championship_btn);
         bundesligabtn = v.findViewById(R.id.bundesliga_btn);
         secbundesligabtn = v.findViewById(R.id.bundesliga2_btn);
+        ligue1btn = v.findViewById(R.id.ligue1_btn);
+        ligue2btn = v.findViewById(R.id.ligue2_btn);
+        eredvisebtn = v.findViewById(R.id.eredvise_btn);
+        spanishbtn = v.findViewById(R.id.spanish_btn);
+        seriaabtn = v.findViewById(R.id.seriaa_btn);
+        seriabbtn = v.findViewById(R.id.seriab_btn);
+        portugesebtn = v.findViewById(R.id.portugese_btn);
+        brazilbtn = v.findViewById(R.id.brazil_btn);
         plbtn.setOnClickListener(this);
         championshipbtn.setOnClickListener(this);
         bundesligabtn.setOnClickListener(this);
         secbundesligabtn.setOnClickListener(this);
-
+        ligue1btn.setOnClickListener(this);
+        ligue2btn.setOnClickListener(this);
+        eredvisebtn.setOnClickListener(this);
+        spanishbtn.setOnClickListener(this);
+        seriaabtn.setOnClickListener(this);
+        seriabbtn.setOnClickListener(this);
+        portugesebtn.setOnClickListener(this);
+        brazilbtn.setOnClickListener(this);
         return v;
     }
 
@@ -116,22 +134,67 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
         mListener = null;
     }
 
+
+
+
+
+
+        /**
+         * This interface must be implemented by activities that contain this
+         * fragment to allow an interaction in this fragment to be communicated
+         * to the activity and potentially other fragments contained in that
+         * activity.
+         * <p>
+         * See the Android Training lesson <a href=
+         * "http://developer.android.com/training/basics/fragments/communicating.html"
+         * >Communicating with Other Fragments</a> for more information.
+         */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
     @Override
     public void onClick(View view) {
+
         int id = view.getId();
         String arg = "";
         switch (id) {
-            case (premierLeagueid):
+            case (R.id.premierleague_btn):
                 arg = getResources().getString(R.string.premier_league);
                 break;
-            case (championshipid):
+            case (R.id.championship_btn):
                 arg = getResources().getString(R.string.championship);
                 break;
-            case (bundesligaid):
+            case (R.id.bundesliga_btn):
                 arg = getResources().getString(R.string.bundesliga);
                 break;
-            case (secbundesligaid):
+            case (R.id.bundesliga2_btn):
                 arg = getResources().getString(R.string.secbundesliga);
+                break;
+            case (R.id.ligue1_btn):
+                arg = getResources().getString(R.string.ligue1);
+                break;
+            case (R.id.ligue2_btn):
+                arg = getResources().getString(R.string.ligue2);
+                break;
+            case (R.id.eredvise_btn):
+                arg = getResources().getString(R.string.eredvise);
+                break;
+            case (R.id.spanish_btn):
+                arg = getResources().getString(R.string.spanishleague);
+                break;
+            case (R.id.seriaa_btn):
+                arg = getResources().getString(R.string.seria_A);
+                break;
+            case (R.id.seriab_btn):
+                arg = getResources().getString(R.string.seria_B);
+                break;
+            case (R.id.portugese_btn):
+                arg = getResources().getString(R.string.portugeseleague);
+                break;
+            case (R.id.brazil_btn):
+                arg = getResources().getString(R.string.brazilleague);
                 break;
         }
 
@@ -139,25 +202,11 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
         FragmentManager manager = ma.getSupportFragmentManager();
         manager.beginTransaction().
                 replace(R.id.toolbar_con, TopBarLeaguesFragment.newInstance(arg)
-                , TopBarLeaguesFragment.class.getSimpleName()).commitAllowingStateLoss();
+                        , TopBarLeaguesFragment.class.getSimpleName()).commitAllowingStateLoss();
         manager.beginTransaction().
                 replace(R.id.fragment_con,
-                TableStandingsFragment.newInstance(arg),
-                TableStandingsFragment.class.getSimpleName()).commitAllowingStateLoss();
-    }
+                        TableStandingsFragment.newInstance(arg),
+                        TableStandingsFragment.class.getSimpleName()).commitAllowingStateLoss();
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

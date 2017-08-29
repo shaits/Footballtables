@@ -86,13 +86,21 @@ public class TopBarLeaguesFragment extends Fragment {
                 txtview.setText(getResources().getString(R.string.seria_A));
                 imageView.setImageResource(R.drawable.flagitaly);
                 break;
+            case ("Serie B"):
+                txtview.setText(getResources().getString(R.string.seria_B));
+                imageView.setImageResource(R.drawable.flagitaly);
+                break;
             case ("Primeira Liga"):
                 txtview.setText(getResources().getString(R.string.portugeseleague));
                 imageView.setImageResource(R.drawable.flagportugal);
                 break;
+            case ("Brasileirão"):
+                txtview.setText(getResources().getString(R.string.brazilleague));
+                imageView.setImageResource(R.drawable.flagbrazil);
+                break;
             default:
                 txtview.setText(getResources().getString(R.string.app_name));
-                //  imageView.setImageResource(R.mipmap.footballicon);
+                imageView.setImageResource(R.mipmap.footballicon);
                 break;
         }
     }
