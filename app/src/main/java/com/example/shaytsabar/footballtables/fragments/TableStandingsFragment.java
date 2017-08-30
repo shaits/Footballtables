@@ -77,7 +77,7 @@
                 case ("Premier League"):
                     url = League_standings.GetPLQuery();
                     break;
-                case ("Football League Championship"):
+                case ("Championship"):
                     url = League_standings.GetChampionshipQuery();
                     break;
                 case ("Eredvise"):
@@ -124,6 +124,7 @@
                // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 //StrictMode.setThreadPolicy(policy);
                 v= inflater.inflate(R.layout.fragment_recyclerview, container, false);
+                TextView textView=v.findViewById(R.id.points_txtview);
                 DownloadTask downloadTask=new DownloadTask();
                 downloadTask.execute(GeturlTeamsByArg());
                 return v;
@@ -190,11 +191,13 @@
                 URL searchUrl = params[0];
                 TeamLeagueStandings[] results = null;
                 try {
-                    results = League_standings.LeagueStandingsArray(searchUrl,isOnLandscape);
+                    results = League_standings.LeagueStandingsArray(searchUrl, isOnLandscape);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } catch (Exception e) {
+                    Log.d("error", e.toString());
                 }
 
                 return results;
@@ -203,40 +206,43 @@
             @Override
             protected void onPostExecute(TeamLeagueStandings[] results) {
                 //gifTextView.setVisibility(View.INVISIBLE);
-                TextView errortxtview= v.findViewById(R.id.error_txtview);
-                Button tryagainbtn=v.findViewById(R.id.tryagain_btn);
-                if(results==null) {
+                TextView errortxtview = v.findViewById(R.id.error_txtview);
+                Button tryagainbtn = v.findViewById(R.id.tryagain_btn);
+                if (results == null) {
                     errortxtview.setVisibility(View.VISIBLE);
                     tryagainbtn.setVisibility(View.VISIBLE);
                     tryagainbtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            DownloadTask downloadTask1=new DownloadTask();
+                            DownloadTask downloadTask1 = new DownloadTask();
                             downloadTask1.execute(GeturlTeamsByArg());
                         }
                     });
-                }
-                else {
-                    if(errortxtview.getVisibility()==View.VISIBLE){
+                } else {
+                    if (errortxtview.getVisibility() == View.VISIBLE) {
                         errortxtview.setVisibility(View.GONE);
                         tryagainbtn.setVisibility(View.GONE);
                         Toast toast = Toast.makeText(getContext(), getResources().
-                                getString(R.string.nevergiveup) , Toast.LENGTH_SHORT);
+                                getString(R.string.nevergiveup), Toast.LENGTH_SHORT);
                         toast.show();
-                        MainActivity mainActivity= (MainActivity) getActivity();
+                        MainActivity mainActivity = (MainActivity) getActivity();
                         mainActivity.ShowLittleAd();
 
                     }
-                    TeamAdapter adapter = new TeamAdapter(results);
-                    RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyler_teams);
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.addItemDecoration(new VerticalSpaceItemDecorator(30));
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-                    layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                    recyclerView.setLayoutManager(layoutManager);
-                }
+                    try {
+                        TeamAdapter adapter = new TeamAdapter(results);
+                        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyler_teams);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.addItemDecoration(new VerticalSpaceItemDecorator(30));
+                        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+                        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                        recyclerView.setLayoutManager(layoutManager);
+                    } catch (Exception e) {
+                        Log.d("Error",e.toString());
+                    }
 
+                }
             }
         }
 

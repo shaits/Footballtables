@@ -4,6 +4,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,24 +39,21 @@ import com.example.shaytsabar.footballtables.model.TeamLeagueStandings;
     @Override
     public void onBindViewHolder(TeamAdapter.TeamViewHolder holder, int position) {
 
+            TeamLeagueStandings team = teams[position];
+            holder.place.setText(team.getPlace());
+            holder.teamname.setText(team.getTeamName());
+            holder.matches.setText(team.getCurGames());
+            holder.wins.setText(team.getWins());
+            holder.draws.setText(team.getDraws());
+            holder.losses.setText(team.getLosses());
+            holder.gd.setText(team.getGoalDifference());
+            holder.points.setText(team.getPoints());
+                if (Integer.parseInt(team.getPlace()) % 2 == 0)
+                    holder.rootview.setBackgroundColor(Color.parseColor("#EBEBEB"));
+                else
+                    holder.rootview.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            }
 
-        TeamLeagueStandings team = teams[position];
-        holder.place.setText(team.getPlace());
-        holder.teamname.setText(team.getTeamName());
-        holder.matches.setText(team.getCurGames());
-        holder.wins.setText(team.getWins());
-        holder.draws.setText(team.getDraws());
-        holder.losses.setText(team.getLosses());
-        holder.gd.setText(team.getGoalDifference());
-        holder.points.setText(team.getPoints());
-        if(Integer.parseInt(team.getPlace()) %2 == 0 )
-            holder.rootview.setBackgroundColor(Color.parseColor("#EBEBEB"));
-        else
-            holder.rootview.setBackgroundColor(Color.parseColor("#FFFFFF"));
-
-
-
-    }
 
     @Override
     public int getItemCount() {

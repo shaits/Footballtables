@@ -54,7 +54,7 @@ public class TopBarLeaguesFragment extends Fragment {
                txtview.setText(getResources().getString(R.string.premier_league));
                 imageView.setImageResource(R.drawable.flagengland);
                 break;
-            case ("Football League Championship"):
+            case ("Championship"):
                 txtview.setText(getResources().getString(R.string.championship));
                 imageView.setImageResource(R.drawable.flagengland);
                 break;

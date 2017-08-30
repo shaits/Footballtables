@@ -26,9 +26,9 @@ public class League_standings {
     private final static int SECBUNDESLIGACODE = 453;
     private final static int SPANISHCODE = 455;
     private final static int SERIAACODE = 456;
-    private final static int SERIABCODE=459;
+    private final static int SERIABCODE = 459;
     private final static int PORTUGESECODE = 457;
-    private final static int BRAZILCODE=444;
+    private final static int BRAZILCODE = 444;
     private static String leagueCode = "";
     private static String querystr = "";
     private static URL url = null;
@@ -113,6 +113,7 @@ public class League_standings {
         url = Data.BuildUrl(querystr);
         return url;
     }
+
     public static URL GetSeriaBQuery() {
         // Returns the full URL of the search query combined with the seria A code.
         leagueCode = Integer.toString(SERIABCODE);
@@ -139,9 +140,9 @@ public class League_standings {
         JSONArray teamsJson = resultsJSON.getJSONArray("standing");
         int length = teamsJson.length();
         teams = new TeamLeagueStandings[length];
+
         // name,games,wins,draws,losses,GD,points, pic
         for (int i = 0; i < length; i++) {
-
 
             JSONObject object = teamsJson.getJSONObject((i));
             TeamLeagueStandings team = new TeamLeagueStandings();
@@ -155,19 +156,24 @@ public class League_standings {
             team.setPoints(Integer.toString(object.getInt("points")));
             team.setImgString(object.getString("crestURI"));
             String teamm = team.getTeamName();
-            teamm=FixGoddamnAPIErrors(teamm,isOnLandscape);
+            teamm = FixGoddamnAPIErrors(teamm, isOnLandscape);
             team.setTeamName(teamm);
             teams[i] = team;
+
         }
 
         return teams;
     }
 
+
     private static String FixGoddamnAPIErrors(String teamm, boolean isOnLandscape) {
+        boolean rowdown = false;
         if (teamm.startsWith("1. "))
             teamm = teamm.replace("1. ", "");
-        if (teamm.toLowerCase().contains("FC".toLowerCase()))
-            teamm = teamm.replace("FC", "");
+        if (!teamm.toLowerCase().contains("AFC".toLowerCase())) {
+            if (teamm.toLowerCase().contains("FC".toLowerCase()))
+                teamm = teamm.replace("FC", "");
+        }
         if (teamm.endsWith(" "))
             teamm = StringUtils.strip(teamm);
         if (!isOnLandscape) {
@@ -176,11 +182,28 @@ public class League_standings {
                     char c = teamm.charAt(j);
                     if (c == ' ') {
                         teamm = teamm.substring(0, j) + "\n" + teamm.substring(j + 1);
+                        rowdown = true;
                         break;
                     }
                 }
             }
+
+            if (!rowdown) {
+                if (teamm.length() >= 16) {
+                    for (int j = 0; j < 12; j++) {
+                        char c = teamm.charAt(j);
+                        if (c == ' ') {
+                            teamm = teamm.substring(0, j) + "\n" + teamm.substring(j + 1);
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+
         }
-        return teamm;
+            return teamm;
+
     }
 }
