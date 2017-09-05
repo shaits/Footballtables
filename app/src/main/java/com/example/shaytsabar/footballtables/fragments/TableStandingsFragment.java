@@ -1,6 +1,7 @@
     package com.example.shaytsabar.footballtables.fragments;
 
     import android.content.Context;
+    import android.content.pm.ActivityInfo;
     import android.content.res.Configuration;
     import android.graphics.Rect;
     import android.net.Uri;
@@ -41,6 +42,8 @@
         private View v;
         private OnFragmentInteractionListener mListener;
         private boolean isOnLandscape=false;
+        boolean isLittle=false;
+        boolean isBig=false;
 
         public TableStandingsFragment() {
             // Required empty public constructor
@@ -59,6 +62,7 @@
         public void onCreate(Bundle savedInstanceState) {
 
             super.onCreate(savedInstanceState);
+            this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             if (getArguments() != null) {
                 league = getArguments().getString(LEAGUETOLAUNCH);
             }
@@ -121,9 +125,18 @@
                     isOnLandscape=true;
                 else
                     isOnLandscape=false;
-               // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                //StrictMode.setThreadPolicy(policy);
                 v= inflater.inflate(R.layout.fragment_recyclerview, container, false);
+                Configuration configuration = getActivity().getApplicationContext()
+                        .getResources().getConfiguration();
+                int screenWidth= configuration.smallestScreenWidthDp;
+                if(screenWidth<340)
+                {
+                    isLittle=true;
+                }else
+                    if(screenWidth>560)
+                        isBig=true;
+
+
                 TextView textView=v.findViewById(R.id.points_txtview);
                 DownloadTask downloadTask=new DownloadTask();
                 downloadTask.execute(GeturlTeamsByArg());
@@ -191,7 +204,7 @@
                 URL searchUrl = params[0];
                 TeamLeagueStandings[] results = null;
                 try {
-                    results = League_standings.LeagueStandingsArray(searchUrl, isOnLandscape);
+                    results = League_standings.LeagueStandingsArray(searchUrl, isOnLandscape,isLittle,isBig);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {

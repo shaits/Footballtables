@@ -131,7 +131,7 @@ public class League_standings {
     }
 
 
-    public static TeamLeagueStandings[] LeagueStandingsArray(URL url, boolean isOnLandscape) throws IOException, JSONException {
+    public static TeamLeagueStandings[] LeagueStandingsArray(URL url, boolean isOnLandscape,boolean islittle,boolean isBig) throws IOException, JSONException {
         //Gets the full url of the requested league table, should look like: "http://api.football-data.org/v1/competitions/445/leagueTable"
         //Processing the JSON data from the API, then returns an array which contains the teams of the league
         //that was requested, in THE ORDER OF THE TABLE!!!
@@ -156,7 +156,7 @@ public class League_standings {
             team.setPoints(Integer.toString(object.getInt("points")));
             team.setImgString(object.getString("crestURI"));
             String teamm = team.getTeamName();
-            teamm = FixGoddamnAPIErrors(teamm, isOnLandscape);
+            teamm = FixGoddamnAPIErrors(teamm, isOnLandscape,islittle,isBig);
             team.setTeamName(teamm);
             teams[i] = team;
 
@@ -166,44 +166,40 @@ public class League_standings {
     }
 
 
-    private static String FixGoddamnAPIErrors(String teamm, boolean isOnLandscape) {
-        boolean rowdown = false;
+    private static String FixGoddamnAPIErrors(String teamm, boolean isOnLandscape,boolean islittle,boolean isBig) {
         if (teamm.startsWith("1. "))
             teamm = teamm.replace("1. ", "");
-        if (!teamm.toLowerCase().contains("AFC".toLowerCase())) {
-            if (teamm.toLowerCase().contains("FC".toLowerCase()))
-                teamm = teamm.replace("FC", "");
-        }
-        if (teamm.endsWith(" "))
+        if (teamm.toLowerCase().contains("AFC".toLowerCase()))
+            teamm = teamm.replace("AFC", "");
+        else if (teamm.toLowerCase().contains("FC".toLowerCase()))
+            teamm = teamm.replace("FC", "");
+        if (teamm.endsWith(" ") || teamm.startsWith(" "))
             teamm = StringUtils.strip(teamm);
-        if (!isOnLandscape) {
-            if (teamm.length() > 12) {
-                for (int j = 12; j < teamm.length(); j++) {
-                    char c = teamm.charAt(j);
-                    if (c == ' ') {
-                        teamm = teamm.substring(0, j) + "\n" + teamm.substring(j + 1);
-                        rowdown = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!rowdown) {
-                if (teamm.length() >= 16) {
-                    for (int j = 0; j < 12; j++) {
-                        char c = teamm.charAt(j);
-                        if (c == ' ') {
-                            teamm = teamm.substring(0, j) + "\n" + teamm.substring(j + 1);
+        if(!isBig && teamm.contains(" "))
+        if (!isOnLandscape || islittle) {
+            if (((!islittle)&& teamm.length() >= 14) || (islittle && teamm.length()>=20)) {
+                int a = 0;
+                int b = 0;
+                char c;
+                for (int i = 0; i < teamm.length(); i++) {
+                    c = teamm.charAt(i);
+                     if (c == ' ') {
+                        if (a != 0) {
+                            b = i;
                             break;
-                        }
+                        } else
+                            a = i;
                     }
                 }
+                if (a != 0 && b != 0) {
+                    teamm = teamm.substring(0, b) + "\n" + teamm.substring(b + 1);
 
+                } else
+                    teamm = teamm.substring(0, a) + "\n" + teamm.substring(a + 1);
             }
-
-
         }
-            return teamm;
+
+        return teamm;
 
     }
 }

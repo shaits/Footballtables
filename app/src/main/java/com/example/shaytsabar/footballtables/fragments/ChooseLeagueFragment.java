@@ -1,18 +1,28 @@
 package com.example.shaytsabar.footballtables.fragments;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.ConstraintSet;
+import android.support.constraint.Guideline;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.example.shaytsabar.footballtables.R;
 import com.example.shaytsabar.footballtables.activities.MainActivity;
+
+import static android.support.constraint.ConstraintSet.LEFT;
+import static android.support.constraint.ConstraintSet.RIGHT;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,8 +35,8 @@ import com.example.shaytsabar.footballtables.activities.MainActivity;
 public class ChooseLeagueFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String IS_VERTICALVIEW = "SUSHI";
+    private FrameLayout frameLayout;
     private Button plbtn;
     private Button championshipbtn;
     private Button bundesligabtn;
@@ -42,8 +52,8 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
 
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private boolean isverticalview;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -60,11 +70,10 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
      * @return A new instance of fragment ChooseLeagueFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ChooseLeagueFragment newInstance(String param1, String param2) {
+    public static ChooseLeagueFragment newInstance(boolean isverticalview) {
         ChooseLeagueFragment fragment = new ChooseLeagueFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putBoolean(IS_VERTICALVIEW, isverticalview);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,8 +82,8 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            isverticalview = getArguments().getBoolean(IS_VERTICALVIEW);
+
         }
     }
 
@@ -82,7 +91,17 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_chooseleague, container, false);
+        Configuration configuration = getActivity().getApplicationContext()
+                .getResources().getConfiguration();
+        int screenWidth= configuration.smallestScreenWidthDp;
+        if(screenWidth<340)
+            this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT);
+        View v;
+        if(!isverticalview)
+             v= inflater.inflate(R.layout.fragment_chooseleague, container, false);
+        else
+             v = inflater.inflate(R.layout.fragment_chooseleague_vertical, container, false);
+
         plbtn = v.findViewById(R.id.premierleague_btn);
         championshipbtn = v.findViewById(R.id.championship_btn);
         bundesligabtn = v.findViewById(R.id.bundesliga_btn);
@@ -200,13 +219,29 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
 
         MainActivity ma = (MainActivity) getActivity();
         FragmentManager manager = ma.getSupportFragmentManager();
+        if(ma.screenWidth>=590) {
+            Fragment tablesfragment = manager.findFragmentById(R.id.fragment_con);
+            if (tablesfragment == null) {
+                FrameLayout choosecon = (FrameLayout) ma.findViewById(R.id.choose_con);
+                FrameLayout fragmeentcon = (FrameLayout) ma.findViewById(R.id.fragment_con);
+                Guideline guideline = (Guideline) ma.findViewById(R.id.guideline);
+                ma.constraintSet.connect(fragmeentcon.getId(), LEFT, guideline.getId(), RIGHT, 0);
+                ma.constraintSet.connect(choosecon.getId(), RIGHT, guideline.getId(), LEFT, 0);
+                ma.constraintSet.applyTo(ma.constraintLayout);
+                manager.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_in_right).
+                        replace(R.id.choose_con,
+                                ChooseLeagueFragment.newInstance(true),
+                                ChooseLeagueFragment.class.getSimpleName()).commitAllowingStateLoss();
+            }
+        }
         manager.beginTransaction().
                 replace(R.id.toolbar_con, TopBarLeaguesFragment.newInstance(arg)
                         , TopBarLeaguesFragment.class.getSimpleName()).commitAllowingStateLoss();
-        manager.beginTransaction().
+        manager.beginTransaction().setCustomAnimations(R.anim.slide_in_left,R.anim.slide_in_right).
                 replace(R.id.fragment_con,
                         TableStandingsFragment.newInstance(arg),
                         TableStandingsFragment.class.getSimpleName()).commitAllowingStateLoss();
+
 
     }
 }

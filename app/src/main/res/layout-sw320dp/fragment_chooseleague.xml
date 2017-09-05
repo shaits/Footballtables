@@ -1,0 +1,234 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.shaytsabar.footballtables.fragments.ChooseLeagueFragment">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <Button
+                android:id="@+id/ligue1_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="32dp"
+                android:background="#9bdbc7"
+                android:drawableRight="@drawable/flagfrance"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/ligue1"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="12dp"
+                app:layout_constraintLeft_toLeftOf="@+id/bundesliga_btn"
+                app:layout_constraintTop_toBottomOf="@+id/bundesliga_btn" />
+
+            <Button
+                android:id="@+id/ligue2_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginRight="0dp"
+                android:background="#9bdbc7"
+                android:drawableRight="@drawable/flagfrance"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/ligue2"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ligue1_btn"
+                app:layout_constraintRight_toRightOf="@+id/bundesliga2_btn" />
+
+            <Button
+                android:id="@+id/eredvise_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="32dp"
+                android:background="#9bdbc7"
+                android:drawableRight="@drawable/flagnetherlands"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/eredvise"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="12dp"
+                app:layout_constraintLeft_toLeftOf="@+id/ligue1_btn"
+                app:layout_constraintTop_toBottomOf="@+id/ligue1_btn" />
+
+            <Button
+                android:id="@+id/seriaa_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="32dp"
+                android:background="#9bdbc7"
+                android:drawableRight="@drawable/flagitaly"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/seria_A"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="12dp"
+                app:layout_constraintLeft_toLeftOf="@+id/eredvise_btn"
+                app:layout_constraintTop_toBottomOf="@+id/eredvise_btn" />
+
+            <Button
+                android:id="@+id/seriab_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginRight="0dp"
+                android:background="#9bdbc7"
+                android:drawableRight="@drawable/flagitaly"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/seria_B"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/seriaa_btn"
+                app:layout_constraintRight_toRightOf="@+id/spanish_btn" />
+
+            <Button
+                android:id="@+id/spanish_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginRight="0dp"
+                android:background="#9bdbc7"
+                android:drawableRight="@drawable/flagspain"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/spanishleague"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/eredvise_btn"
+                app:layout_constraintRight_toRightOf="@+id/ligue2_btn" />
+
+            <Button
+                android:id="@+id/brazil_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginRight="0dp"
+                android:background="#9bdbc7"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/flagbrazil"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/brazilleague"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/portugese_btn"
+                app:layout_constraintRight_toRightOf="@+id/seriab_btn" />
+
+            <Button
+                android:id="@+id/portugese_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="32dp"
+                android:background="#9bdbc7"
+                android:drawableRight="@drawable/flagportugal"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/portugeseleague"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="10dp"
+                app:layout_constraintLeft_toLeftOf="@+id/seriaa_btn"
+                app:layout_constraintTop_toBottomOf="@+id/seriaa_btn" />
+
+            <Button
+                android:id="@+id/bundesliga_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-42dp"
+                android:layout_marginTop="34dp"
+                android:background="#9bdbc7"
+                android:drawableRight="@drawable/flaggermany"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/bundesliga"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="12dp"
+                app:layout_constraintLeft_toLeftOf="@+id/premierleague_btn"
+                app:layout_constraintTop_toBottomOf="@+id/premierleague_btn" />
+
+            <Button
+                android:id="@+id/bundesliga2_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:layout_marginRight="0dp"
+                android:background="#9bdbc7"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/flaggermany"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/secbundesliga"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/bundesliga_btn"
+                app:layout_constraintRight_toRightOf="@+id/championship_btn" />
+
+            <Button
+                android:id="@+id/championship_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:background="#9bdbc7"
+                android:drawablePadding="10dp"
+                android:drawableRight="@drawable/flagengland"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/shrtchampionship"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/premierleague_btn"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/premierleague_btn"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:background="#9bdbc7"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/flagengland"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/premier_league"
+                android:textAlignment="textStart"
+                android:textColor="#191917"
+                android:textSize="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</FrameLayout>
