@@ -154,7 +154,6 @@ public class League_standings {
             team.setLosses(Integer.toString(object.getInt("losses")));
             team.setGoalDifference(Integer.toString(object.getInt("goalDifference")));
             team.setPoints(Integer.toString(object.getInt("points")));
-            team.setImgString(object.getString("crestURI"));
             String teamm = team.getTeamName();
             teamm = FixGoddamnAPIErrors(teamm, isOnLandscape,islittle,isBig);
             team.setTeamName(teamm);
@@ -177,7 +176,7 @@ public class League_standings {
             teamm = StringUtils.strip(teamm);
         if(!isBig && teamm.contains(" "))
         if (!isOnLandscape || islittle) {
-            if (((!islittle)&& teamm.length() >= 14) || (islittle && teamm.length()>=20)) {
+            if (((!islittle)&& teamm.length() >= 14) || (islittle && teamm.length()>=15)) {
                 int a = 0;
                 int b = 0;
                 char c;

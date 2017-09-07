@@ -15,7 +15,6 @@ public class TeamLeagueStandings {
     private String losses;
     private String goalDifference;
     private String points;
-    private String imgString;
 
     public String getPlace() {
         return place;
@@ -28,18 +27,6 @@ public class TeamLeagueStandings {
     public TeamLeagueStandings() {
     }
 
-   /* public TeamLeagueStandings(int place,String teamName, int curGames, int wins, int draws, int losses, int goalDifference, int points) {
-        this.place=place;
-        this.teamName = teamName;
-        this.curGames = curGames;
-        this.wins = wins;
-        this.draws = draws;
-        this.losses = losses;
-        this.goalDifference = goalDifference;
-        this.points = points;
-
-    }
-*/
     public String getTeamName() {
         return teamName;
     }
@@ -96,11 +83,4 @@ public class TeamLeagueStandings {
         this.points = points;
     }
 
-    public String getImgString() {
-        return imgString;
-    }
-
-    public void setImgString(String imgString) {
-        this.imgString = imgString;
-    }
 }

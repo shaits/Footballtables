@@ -84,8 +84,7 @@
             if(savedInstanceState!=null)
                 timesTillNextAd=savedInstanceState.getInt(TIMESTILLNEXTBIGAD);
             manager = getSupportFragmentManager();
-            Configuration configuration = getApplicationContext()
-                    .getResources().getConfiguration();
+            Configuration configuration = getApplicationContext().getResources().getConfiguration();
             screenWidth= configuration.smallestScreenWidthDp;
             doineedtwofragments();
             if(istwofragments){
@@ -133,6 +132,7 @@
             if (istwofragments) {
                 if(fragmentTables!=null && fragmentTables instanceof TableStandingsFragment)
                     manager.beginTransaction().remove(fragmentTables).commit();
+
                 fragmentTables= manager.findFragmentById(R.id.fragment_con);
                 fragmentcon=(FrameLayout)findViewById(R.id.fragment_con);
                 choosecon=(FrameLayout)findViewById(R.id.choose_con);
@@ -184,19 +184,22 @@
                 mInterstitialAd.show();
                 timesTillNextAd = 3;
             }
+
             if (screenWidth < 590)
                 if (fragmentTables instanceof TableStandingsFragment) {
                     ShowMainFragment();
                     isMainFragment = true;
                 }
                 else
-                    super.onBackPressed();
+                super.onBackPressed();
+
             else {
                 if (fragmentTables != null) {
                     if (fragmentTables instanceof TableStandingsFragment)
                         ShowMainFragment();
-                    isMainFragment=true;
+                    isMainFragment = true;
                 }
+
                 else
                     super.onBackPressed();
             }

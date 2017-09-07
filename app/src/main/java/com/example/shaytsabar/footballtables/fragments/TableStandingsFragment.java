@@ -7,6 +7,7 @@
     import android.net.Uri;
     import android.os.AsyncTask;
     import android.os.Bundle;
+    import android.os.Handler;
     import android.os.StrictMode;
     import android.support.v4.app.Fragment;
     import android.support.v4.app.FragmentManager;
@@ -44,6 +45,7 @@
         private boolean isOnLandscape=false;
         boolean isLittle=false;
         boolean isBig=false;
+        ProgressBar progressBar;
 
         public TableStandingsFragment() {
             // Required empty public constructor
@@ -62,7 +64,6 @@
         public void onCreate(Bundle savedInstanceState) {
 
             super.onCreate(savedInstanceState);
-            this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             if (getArguments() != null) {
                 league = getArguments().getString(LEAGUETOLAUNCH);
             }
@@ -138,8 +139,19 @@
 
 
                 TextView textView=v.findViewById(R.id.points_txtview);
-                DownloadTask downloadTask=new DownloadTask();
-                downloadTask.execute(GeturlTeamsByArg());
+
+                 Runnable mMyRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        DownloadTask downloadTask = new DownloadTask();
+                        downloadTask.execute(GeturlTeamsByArg());
+                    }
+                };
+                    progressBar=v.findViewById(R.id.progressBar);
+                    progressBar.setVisibility(View.VISIBLE);
+                    Handler myHandler = new Handler();
+                    myHandler.postDelayed(mMyRunnable, 1000);
+
                 return v;
             }
 
@@ -218,7 +230,7 @@
 
             @Override
             protected void onPostExecute(TeamLeagueStandings[] results) {
-                //gifTextView.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.GONE);
                 TextView errortxtview = v.findViewById(R.id.error_txtview);
                 Button tryagainbtn = v.findViewById(R.id.tryagain_btn);
                 if (results == null) {
@@ -242,7 +254,6 @@
                         mainActivity.ShowLittleAd();
 
                     }
-                    try {
                         TeamAdapter adapter = new TeamAdapter(results);
                         RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.recyler_teams);
                         recyclerView.setHasFixedSize(true);
@@ -251,9 +262,7 @@
                         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
                         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                         recyclerView.setLayoutManager(layoutManager);
-                    } catch (Exception e) {
-                        Log.d("Error",e.toString());
-                    }
+
 
                 }
             }

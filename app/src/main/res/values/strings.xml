@@ -17,9 +17,8 @@
     <string name="seria_B">Serie B</string>
     <string name="brazilleague">Brasileirão</string>
     <string name="portugeseleague">Primeira Liga</string>
-    <string name="error">Sorry, we were unable to get data from the server.
-        \nBUT\n Like good athletes, we will never give up. Try us again!</string>
-    <string name="kickit">Kick it again player!</string>
-    <string name="nevergiveup">See? Never give up!</string>
+    <string name="error">Oh, guess we have missed something... Try us again! </string>
+    <string name="kickit">Kick it again player!</string>////
+    <string name="nevergiveup">Yes!!! We did it! </string>
     <string name="ad_id">ca-app-pub-3046903934801639/2092473541</string>
 </resources>

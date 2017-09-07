@@ -94,8 +94,6 @@ public class ChooseLeagueFragment extends Fragment implements View.OnClickListen
         Configuration configuration = getActivity().getApplicationContext()
                 .getResources().getConfiguration();
         int screenWidth= configuration.smallestScreenWidthDp;
-        if(screenWidth<340)
-            this.getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT);
         View v;
         if(!isverticalview)
              v= inflater.inflate(R.layout.fragment_chooseleague, container, false);
