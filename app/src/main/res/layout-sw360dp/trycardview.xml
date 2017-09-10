@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="35dp"
-            android:layout_marginRight="10dp"
+            android:textDirection="ltr"
             android:layout_marginTop="8dp"
             android:padding="0dp"
             android:text="Team"
@@ -44,9 +44,7 @@
             android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@+id/position_txtview"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/matches_txtview"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -118,6 +116,7 @@
             android:layout_marginRight="38dp"
             android:layout_marginTop="8dp"
             android:text="GD"
+            android:textDirection="ltr"
             android:textAlignment="center"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/position_txtview"

@@ -47,10 +47,8 @@
             android:id="@+id/error_txtview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
             android:text="@string/error"
             android:textAlignment="center"
             android:textSize="30sp"
@@ -103,7 +101,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="10dp" />
+                     />
 
 
                 <TextView
@@ -114,12 +112,13 @@
                     android:layout_marginLeft="50dp"
                     android:layout_marginTop="9dp"
                     android:text="Team"
+                    android:textDirection="ltr"
                     android:textAlignment="textStart"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="50dp" />
+                    />
 
                 <TextView
                     android:id="@+id/losses_txtview"
@@ -135,7 +134,7 @@
                     app:layout_constraintRight_toLeftOf="@+id/gd_txtview"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0"
-                    android:layout_marginEnd="32dp" />
+                     />
 
                 <TextView
                     android:id="@+id/draws_txtview"
@@ -151,7 +150,7 @@
                     app:layout_constraintRight_toLeftOf="@+id/losses_txtview"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0"
-                    android:layout_marginEnd="32dp" />
+                    />
 
                 <TextView
                     android:id="@+id/wins_txtview"
@@ -167,7 +166,7 @@
                     app:layout_constraintRight_toLeftOf="@+id/draws_txtview"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0"
-                    android:layout_marginEnd="32dp" />
+                     />
 
                 <TextView
                     android:id="@+id/matches_txtview"
@@ -183,7 +182,7 @@
                     app:layout_constraintRight_toLeftOf="@+id/wins_txtview"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0"
-                    android:layout_marginEnd="32dp" />
+                     />
 
                 <TextView
                     android:id="@+id/gd_txtview"
@@ -199,7 +198,7 @@
                     app:layout_constraintRight_toLeftOf="@+id/points_txtview"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="1.0"
-                    android:layout_marginEnd="32dp" />
+                  />
 
                 <TextView
                     android:id="@+id/points_txtview"
@@ -214,7 +213,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginEnd="32dp" />
+                     />
 
             </android.support.constraint.ConstraintLayout>
         </FrameLayout>

@@ -1,5 +1,6 @@
     package com.example.shaytsabar.footballtables.activities;
 
+    import android.content.Intent;
     import android.content.res.Configuration;
     import android.net.Uri;
     import android.support.constraint.ConstraintLayout;
@@ -9,6 +10,8 @@
     import android.support.v7.app.AppCompatActivity;
     import android.os.Bundle;
     import android.util.Log;
+    import android.view.View;
+    import android.widget.Button;
     import android.widget.FrameLayout;
 
     import com.example.shaytsabar.footballtables.R;
@@ -40,10 +43,10 @@
         public ConstraintLayout constraintLayout;
         public ConstraintSet constraintSet;
         private boolean istwofragments;
-        FrameLayout fragmentcon;
-        FrameLayout choosecon;
-        Fragment fragmentTables;
-
+        private FrameLayout fragmentcon;
+        private FrameLayout choosecon;
+        private Fragment fragmentTables;
+        private Button shareBtn;
 
 
         @Override
@@ -51,6 +54,20 @@
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
+            shareBtn=(Button)findViewById(R.id.share_btn);
+            shareBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    String shareBody = "Hey, You have to get this awesome app! You can see here many football leagues tables from around the world in really simple way!";
+                    String shareSub = "Share Football Tables";
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, shareSub);
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                    startActivity(Intent.createChooser(sharingIntent, "Share using"));
+                }
+            });
             MobileAds.initialize(this, APPCODE);
             ShowLittleAd();
             mInterstitialAd = new InterstitialAd(this);

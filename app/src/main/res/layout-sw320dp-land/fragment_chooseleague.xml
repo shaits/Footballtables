@@ -14,11 +14,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp">
+            tools:layout_editor_absoluteY="0dp"
+            android:textDirection="ltr">
 
             <Button
                 android:id="@+id/ligue1_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="32dp"
@@ -27,15 +28,14 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:text="@string/ligue1"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="12sp"
+                android:textSize="14dp"
                 app:layout_constraintLeft_toLeftOf="@+id/bundesliga_btn"
                 app:layout_constraintTop_toBottomOf="@+id/bundesliga_btn" />
 
             <Button
                 android:id="@+id/ligue2_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:layout_marginRight="0dp"
@@ -44,15 +44,14 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:text="@string/ligue2"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="12sp"
+                android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="@+id/ligue1_btn"
                 app:layout_constraintRight_toRightOf="@+id/bundesliga2_btn" />
 
             <Button
                 android:id="@+id/eredvise_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="32dp"
@@ -61,15 +60,14 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:text="@string/eredvise"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="12sp"
+                android:textSize="14dp"
                 app:layout_constraintLeft_toLeftOf="@+id/ligue1_btn"
                 app:layout_constraintTop_toBottomOf="@+id/ligue1_btn" />
 
             <Button
                 android:id="@+id/seriaa_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="32dp"
@@ -78,15 +76,14 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:text="@string/seria_A"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="12sp"
+                android:textSize="14dp"
                 app:layout_constraintLeft_toLeftOf="@+id/eredvise_btn"
                 app:layout_constraintTop_toBottomOf="@+id/eredvise_btn" />
 
             <Button
                 android:id="@+id/seriab_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:layout_marginRight="0dp"
@@ -95,15 +92,14 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:text="@string/seria_B"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="12sp"
+                android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="@+id/seriaa_btn"
                 app:layout_constraintRight_toRightOf="@+id/spanish_btn" />
 
             <Button
                 android:id="@+id/spanish_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:layout_marginRight="0dp"
@@ -112,15 +108,14 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:text="@string/spanishleague"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="12sp"
+                android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="@+id/eredvise_btn"
                 app:layout_constraintRight_toRightOf="@+id/ligue2_btn" />
 
             <Button
                 android:id="@+id/brazil_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:layout_marginRight="0dp"
@@ -130,15 +125,14 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:text="@string/brazilleague"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="10sp"
+                android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="@+id/portugese_btn"
                 app:layout_constraintRight_toRightOf="@+id/seriab_btn" />
 
             <Button
                 android:id="@+id/portugese_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="32dp"
@@ -147,15 +141,14 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:text="@string/portugeseleague"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="10sp"
+                android:textSize="14dp"
                 app:layout_constraintLeft_toLeftOf="@+id/seriaa_btn"
                 app:layout_constraintTop_toBottomOf="@+id/seriaa_btn" />
 
             <Button
                 android:id="@+id/bundesliga_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="-42dp"
                 android:layout_marginTop="34dp"
@@ -164,15 +157,14 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:text="@string/bundesliga"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="12sp"
+                android:textSize="14dp"
                 app:layout_constraintLeft_toLeftOf="@+id/premierleague_btn"
                 app:layout_constraintTop_toBottomOf="@+id/premierleague_btn" />
 
             <Button
                 android:id="@+id/bundesliga2_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:layout_marginRight="0dp"
@@ -182,18 +174,17 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:text="@string/secbundesliga"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="10sp"
+                android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="@+id/bundesliga_btn"
                 app:layout_constraintRight_toRightOf="@+id/championship_btn" />
 
             <Button
                 android:id="@+id/championship_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:layout_marginRight="60dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="16dp"
                 android:background="#9bdbc7"
                 android:drawablePadding="10dp"
@@ -201,9 +192,8 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:text="@string/shrtchampionship"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="10sp"
+                android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="@+id/premierleague_btn"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -211,9 +201,9 @@
 
             <Button
                 android:id="@+id/premierleague_btn"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="16dp"
                 android:background="#9bdbc7"
                 android:drawablePadding="5sp"
@@ -221,9 +211,8 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="@string/premier_league"
-                android:textAlignment="textStart"
                 android:textColor="#191917"
-                android:textSize="10sp"
+                android:textSize="14dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -29,6 +29,7 @@ public class League_standings {
     private final static int SERIABCODE = 459;
     private final static int PORTUGESECODE = 457;
     private final static int BRAZILCODE = 444;
+
     private static String leagueCode = "";
     private static String querystr = "";
     private static URL url = null;

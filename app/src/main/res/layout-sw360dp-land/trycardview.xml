@@ -43,6 +43,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="9dp"
             android:text="Team"
+            android:textDirection="ltr"
             android:textAlignment="textStart"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -112,6 +113,7 @@
 
         <TextView
             android:id="@+id/gd_txtview"
+            android:textDirection="ltr"
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"

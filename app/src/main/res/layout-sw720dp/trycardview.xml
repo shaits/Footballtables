@@ -44,6 +44,7 @@
             android:layout_marginLeft="75dp"
             android:layout_marginTop="9dp"
             android:text="Team"
+            android:textDirection="ltr"
             android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="18dp"
@@ -119,6 +120,7 @@
         <TextView
             android:id="@+id/gd_txtview"
             android:layout_width="35dp"
+            android:textDirection="ltr"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginRight="32dp"
